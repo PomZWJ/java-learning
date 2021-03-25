@@ -1,0 +1,13 @@
+server:
+  port: 8004
+
+spring:
+  rabbitmq:
+    host: 192.168.205.139
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    #消息发送到交换机确认机制,是否确认回调
+    publisher-confirms: true
+    publisher-returns: true
