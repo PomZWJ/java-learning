@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pomzwj.trans.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.pomzwj.trans.entity.UserInfo">
+        <id column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+        <result column="account_status" jdbcType="VARCHAR" property="accountStatus" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    user_id, user_name, create_date, create_time, icon_url, account_status
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.pomzwj.trans.entity.UserInfo">
+    insert into tb_user (user_id, user_name,create_date, create_time, icon_url, account_status)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+      #{createDate,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},#{iconUrl,jdbcType=VARCHAR}, #{accountStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.pomzwj.trans.entity.UserInfo">
+        insert into tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                user_id,
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name,
+            </if>
+            <if test="createDate != null and createDate != ''">
+                create_date,
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time,
+            </if>
+            <if test="iconUrl != null and iconUrl != ''">
+                icon_url,
+            </if>
+            <if test="accountStatus != null and accountStatus != ''">
+                account_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null and userName != ''">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null and createDate != ''">
+                #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null and iconUrl != ''">
+                #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="accountStatus != null and accountStatus != ''">
+                #{accountStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pomzwj.trans.entity.UserInfo">
+        update tb_user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null and createDate != ''">
+                create_date = #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null and iconUrl != ''">
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="accountStatus != null and accountStatus != ''">
+                account_status = #{accountStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pomzwj.trans.entity.UserInfo">
+    update tb_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      account_status = #{accountStatus,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>
