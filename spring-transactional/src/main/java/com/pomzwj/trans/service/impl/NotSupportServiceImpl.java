@@ -1,0 +1,49 @@
+package com.pomzwj.trans.service.impl;
+
+import com.pomzwj.trans.dao.UserInfoMapper;
+import com.pomzwj.trans.entity.UserInfo;
+import com.pomzwj.trans.service.NotSupportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author zhaowj
+ * @date 2021-04-30
+ */
+@Service
+public class NotSupportServiceImpl implements NotSupportService {
+	@Autowired
+	private UserInfoMapper userInfoMapper;
+
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	@Override
+	public void addRequire(UserInfo user) {
+		userInfoMapper.insert(user);
+	}
+
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.NOT_SUPPORTED)
+	@Override
+	public void addNotSupport(UserInfo user) {
+		userInfoMapper.insert(user);
+	}
+
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	@Override
+	public void addRequire2(UserInfo user) {
+		userInfoMapper.insert(user);
+		UserInfo ui = new UserInfo();
+		ui.setName("老王");
+		ui.setId(100);
+		this.addNotSupportException(ui);
+	}
+
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.NOT_SUPPORTED)
+	@Override
+	public void addNotSupportException(UserInfo user) {
+		userInfoMapper.insert(user);
+		throw new RuntimeException("not support异常");
+	}
+
+}
