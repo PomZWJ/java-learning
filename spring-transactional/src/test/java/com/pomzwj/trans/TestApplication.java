@@ -88,6 +88,7 @@ public class TestApplication {
 		}
 	}
 	@Transactional(propagation = Propagation.REQUIRED)
+	@Commit
 	@Test
 	public void test_REQUIRED_NEW_1(){
 
@@ -158,6 +159,7 @@ public class TestApplication {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
+	@Commit
 	@Test
 	public void test_NESTED_1(){
 
@@ -174,6 +176,7 @@ public class TestApplication {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
+	@Commit
 	@Test
 	public void test_NESTED_2(){
 
