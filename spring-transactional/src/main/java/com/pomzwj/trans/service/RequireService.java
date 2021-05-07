@@ -10,4 +10,7 @@ public interface RequireService {
 	//PROPAGATION_REQUIRED
 	void addRequire(UserInfo userInfo);
 	void addRequireException(UserInfo userInfo);
+
+	void addRequire2(UserInfo user);
+	void addNotSupportException(UserInfo user);
 }
